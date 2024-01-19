@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/introFragment"
-        android:name = "com.samadihadis.countryinformationapplication.peresentaion.intro.IntroFragmentintro"
+        android:name = "com.samadihadis.countryinformationapplication.peresentaion.intro.IntroFragment"
         android:label="IntroFragment">
         <action
             android:id="@+id/action_to_countryListFragment"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/countryListFragment"
-        android:name = "com.samadihadis.countryinformationapplication.peresentaion.list.CountriesListFragment"
+        android:name = "com.samadihadis.countryinformationapplication.peresentaion.list.CountryListFragment"
         android:label="CountryListFragment">
         <action
             android:id="@+id/action_to_countyDetailFragment"

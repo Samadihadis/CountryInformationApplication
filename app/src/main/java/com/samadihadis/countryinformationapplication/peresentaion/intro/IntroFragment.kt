@@ -27,7 +27,7 @@ class IntroFragment : Fragment() {
         lifecycleScope.launch {
             delay(2000)
             findNavController().navigate(
-                IntroFragmentintroDirections.actionToCountryListFragment()
+                IntroFragmentDirections.actionToCountryListFragment()
             )
         }
     }
