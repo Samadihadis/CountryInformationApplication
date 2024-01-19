@@ -6,28 +6,29 @@
 
     <fragment
         android:id="@+id/introFragment"
-        android:name = "com.samadihadis.countryinformationapplication.intro.IntroFragment"
+        android:name = "com.samadihadis.countryinformationapplication.peresentaion.intro.IntroFragmentintro"
         android:label="IntroFragment">
         <action
-            android:id="@+id/action_to_countriesListFragment"
-            app:destination="@+id/countriesListFragment"
+            android:id="@+id/action_to_countryListFragment"
+            app:destination="@+id/countryListFragment"
             app:popUpToInclusive="true"
-            app:popUpTo="@id/introFragment"/>
+            app:popUpTo="@id/introFragment"
+            />
     </fragment>
 
 
     <fragment
-        android:id="@+id/countriesListFragment"
-        android:name = "com.samadihadis.countryinformationapplication.list.CountriesListFragment"
-        android:label="CountriesListFragment">
+        android:id="@+id/countryListFragment"
+        android:name = "com.samadihadis.countryinformationapplication.peresentaion.list.CountriesListFragment"
+        android:label="CountryListFragment">
         <action
-            android:id="@+id/action_to_countriesDetailFragment"
-            app:destination="@+id/countriesDetailFragment" />
+            android:id="@+id/action_to_countyDetailFragment"
+            app:destination="@+id/countryDetailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/countriesDetailFragment"
-        android:name = "com.samadihadis.countryinformationapplication.detail.CountryDetailFragment"
-        android:label="CountriesDetailFragment"/>
+        android:id="@+id/countryDetailFragment"
+        android:name = "com.samadihadis.countryinformationapplication.peresentaion.detail.CountryDetailFragment"
+        android:label="CountryDetailFragment"/>
 
 </navigation>
