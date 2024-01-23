@@ -20,7 +20,7 @@ class CountryListAdapter() : RecyclerView.Adapter<CountryItemListViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-       return countryList.size
+        return countryList.size
     }
 
     fun addItemList(countryModelList: List<CountryModel>) {
@@ -32,11 +32,10 @@ class CountryListAdapter() : RecyclerView.Adapter<CountryItemListViewHolder>() {
         holder.apply {
             countryName.text = countryList[position].name.official
             Glide.with(holder.rootLayout.context)
-                .load( countryList[position].flags.png)
+                .load(countryList[position].flags.png)
                 .placeholder(R.drawable.banner_image_placeholder)
                 .transform(CenterCrop(), RoundedCorners(40))
                 .into(countryImageView)
-
         }
     }
 }

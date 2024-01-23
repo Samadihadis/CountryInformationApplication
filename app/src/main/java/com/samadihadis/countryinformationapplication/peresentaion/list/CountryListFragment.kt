@@ -18,7 +18,9 @@ import retrofit2.Response
 class CountryListFragment : Fragment() {
 
     private lateinit var binding: FragmentCountryListBinding
-    private var countryList = listOf<CountryModel>()
+    private val countryAdaptor by lazy {
+        CountryListAdapter()
+    }
 
 
     override fun onCreateView(
@@ -35,15 +37,13 @@ class CountryListFragment : Fragment() {
     }
 
     private fun setupAdapter() {
-        val countryAdaptor = CountryListAdapter()
         val dividerItemDecoration =
             DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         with(binding.countryRecyclerView) {
-            adapter = countryAdaptor
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             addItemDecoration(dividerItemDecoration)
+            adapter = countryAdaptor
         }
-        countryAdaptor.addItemList(countryList)
     }
 
     private fun getData() {
@@ -67,8 +67,9 @@ class CountryListFragment : Fragment() {
 
     private fun onServerResponse(response: Response<List<CountryModel>>) {
         if (response.isSuccessful) {
-            if (!response.body()?.isEmpty()!!) {
-                countryList = response.body() as List<CountryModel>
+            if (!response.body().isNullOrEmpty()) {
+                val countryList = response.body() as List<CountryModel>
+                countryAdaptor.addItemList(countryList)
             } else {
                 Toast.makeText(requireContext(), "List is Empty!", Toast.LENGTH_SHORT).show()
             }
