@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,13 +26,7 @@ class CountryListFragment : Fragment() {
     private val countryAdaptor by lazy {
         CountryListAdapter()
     }
-    private val animation by lazy {
-        ObjectAnimator.ofFloat(binding.progressBarLoading, "rotation", 0f, 360f).apply {
-            duration = 1000
-            repeatCount = ObjectAnimator.INFINITE
-            interpolator = LinearInterpolator()
-        }
-    }
+    private var animation: ObjectAnimator? = null
 
 
     override fun onCreateView(
@@ -44,6 +39,7 @@ class CountryListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
+        initAnimation()
         getData()
     }
 
@@ -58,6 +54,10 @@ class CountryListFragment : Fragment() {
         binding.retryButton.setOnClickListener {
             getData()
         }
+        countryAdaptor.setItemClickListener {
+            findNavController().navigate(CountryListFragmentDirections.actionToCountyDetailFragment())
+        }
+        countryAdaptor.clearList()
     }
 
     private fun getData() {
@@ -80,7 +80,6 @@ class CountryListFragment : Fragment() {
                     hideLoading()
                     showRetryButton()
                 }
-
             })
     }
 
@@ -101,12 +100,12 @@ class CountryListFragment : Fragment() {
 
     private fun showLoading() {
         binding.progressBarLoading.visible()
-        animation.start()
+        animation?.start()
     }
 
     private fun hideLoading() {
         binding.progressBarLoading.gone()
-        animation.cancel()
+        animation?.cancel()
     }
 
     private fun showRetryButton() {
@@ -117,6 +116,12 @@ class CountryListFragment : Fragment() {
         binding.retryButton.gone()
     }
 
-
+    private fun initAnimation() {
+        animation =  ObjectAnimator.ofFloat(binding.progressBarLoading, "rotation", 0f, 360f).apply {
+            duration = 1000
+            repeatCount = ObjectAnimator.INFINITE
+            interpolator = LinearInterpolator()
+        }
+    }
 
 }
