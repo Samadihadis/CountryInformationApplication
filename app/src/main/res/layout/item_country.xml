@@ -28,6 +28,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/countryImageView"
         app:layout_constraintStart_toEndOf="@+id/countryImageView"
         app:layout_constraintTop_toTopOf="@+id/countryImageView"
+        app:layout_constraintEnd_toStartOf="@+id/arrowImageView"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="Country Name" />
 
