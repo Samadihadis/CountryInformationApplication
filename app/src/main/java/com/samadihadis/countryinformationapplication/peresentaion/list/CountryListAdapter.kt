@@ -34,7 +34,7 @@ class CountryListAdapter() : RecyclerView.Adapter<CountryItemListViewHolder>() {
             Glide.with(holder.rootLayout.context)
                 .load(countryList[position].flags.png)
                 .placeholder(R.drawable.banner_image_placeholder)
-                .transform(CenterCrop(), RoundedCorners(40))
+                .transform(CenterCrop(), RoundedCorners(10))
                 .into(countryImageView)
         }
     }
