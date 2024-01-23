@@ -6,20 +6,19 @@
 
     <fragment
         android:id="@+id/introFragment"
-        android:name = "com.samadihadis.countryinformationapplication.peresentaion.intro.IntroFragment"
+        android:name="com.samadihadis.countryinformationapplication.peresentaion.intro.IntroFragment"
         android:label="IntroFragment">
         <action
             android:id="@+id/action_to_countryListFragment"
             app:destination="@+id/countryListFragment"
-            app:popUpToInclusive="true"
             app:popUpTo="@id/introFragment"
-            />
+            app:popUpToInclusive="true" />
     </fragment>
 
 
     <fragment
         android:id="@+id/countryListFragment"
-        android:name = "com.samadihadis.countryinformationapplication.peresentaion.list.CountryListFragment"
+        android:name="com.samadihadis.countryinformationapplication.peresentaion.list.CountryListFragment"
         android:label="CountryListFragment">
         <action
             android:id="@+id/action_to_countyDetailFragment"
@@ -28,7 +27,14 @@
 
     <fragment
         android:id="@+id/countryDetailFragment"
-        android:name = "com.samadihadis.countryinformationapplication.peresentaion.detail.CountryDetailFragment"
-        android:label="CountryDetailFragment"/>
+        android:name="com.samadihadis.countryinformationapplication.peresentaion.detail.CountryDetailFragment"
+        android:label="CountryDetailFragment">
+        <argument
+            android:name="countryModel"
+            android:defaultValue="@null"
+            app:argType="com.samadihadis.countryinformationapplication.data.CountryModel"
+            app:nullable="true" />
+    </fragment>
+
 
 </navigation>
