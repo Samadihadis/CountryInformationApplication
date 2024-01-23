@@ -1,9 +1,11 @@
 package com.samadihadis.countryinformationapplication.peresentaion.list
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.samadihadis.countryinformationapplication.data.CountryModel
 import com.samadihadis.countryinformationapplication.databinding.FragmentCountryListBinding
 import com.samadihadis.countryinformationapplication.util.RetrofitClient
+import com.samadihadis.countryinformationapplication.util.gone
+import com.samadihadis.countryinformationapplication.util.visible
 import retrofit2.Call
 import retrofit2.Response
 
@@ -20,6 +24,13 @@ class CountryListFragment : Fragment() {
     private lateinit var binding: FragmentCountryListBinding
     private val countryAdaptor by lazy {
         CountryListAdapter()
+    }
+    private val animation by lazy {
+        ObjectAnimator.ofFloat(binding.progressBarLoading, "rotation", 0f, 360f).apply {
+            duration = 1000
+            repeatCount = ObjectAnimator.INFINITE
+            interpolator = LinearInterpolator()
+        }
     }
 
 
@@ -32,11 +43,11 @@ class CountryListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupAdapter()
+        setupViews()
         getData()
     }
 
-    private fun setupAdapter() {
+    private fun setupViews() {
         val dividerItemDecoration =
             DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
         with(binding.countryRecyclerView) {
@@ -44,9 +55,14 @@ class CountryListFragment : Fragment() {
             addItemDecoration(dividerItemDecoration)
             adapter = countryAdaptor
         }
+        binding.retryButton.setOnClickListener {
+            getData()
+        }
     }
 
     private fun getData() {
+        hideRetryButton()
+        showLoading()
         RetrofitClient.apiService.allCountries()
             .enqueue(object : retrofit2.Callback<List<CountryModel>> {
                 override fun onResponse(
@@ -54,12 +70,15 @@ class CountryListFragment : Fragment() {
                     response: Response<List<CountryModel>>
                 ) {
                     onServerResponse(response)
+                    hideLoading()
                 }
 
                 override fun onFailure(call: Call<List<CountryModel>>, t: Throwable) {
                     Toast.makeText(requireContext(), "${t.localizedMessage}", Toast.LENGTH_SHORT)
                         .show()
                     t.printStackTrace()
+                    hideLoading()
+                    showRetryButton()
                 }
 
             })
@@ -71,10 +90,33 @@ class CountryListFragment : Fragment() {
                 val countryList = response.body() as List<CountryModel>
                 countryAdaptor.addItemList(countryList)
             } else {
+                showRetryButton()
                 Toast.makeText(requireContext(), "List is Empty!", Toast.LENGTH_SHORT).show()
             }
         } else {
+            showRetryButton()
             Toast.makeText(requireContext(), "Got an error!", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun showLoading() {
+        binding.progressBarLoading.visible()
+        animation.start()
+    }
+
+    private fun hideLoading() {
+        binding.progressBarLoading.gone()
+        animation.cancel()
+    }
+
+    private fun showRetryButton() {
+        binding.retryButton.visible()
+    }
+
+    private fun hideRetryButton() {
+        binding.retryButton.gone()
+    }
+
+
+
 }
