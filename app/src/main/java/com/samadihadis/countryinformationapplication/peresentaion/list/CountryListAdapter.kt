@@ -12,7 +12,7 @@ import com.samadihadis.countryinformationapplication.data.CountryModel
 class CountryListAdapter() : RecyclerView.Adapter<CountryItemListViewHolder>() {
 
     private var countryList: MutableList<CountryModel> = mutableListOf()
-
+    private var countryItemClickListener : ((CountryModel) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryItemListViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_country, parent, false)
@@ -36,6 +36,18 @@ class CountryListAdapter() : RecyclerView.Adapter<CountryItemListViewHolder>() {
                 .placeholder(R.drawable.banner_image_placeholder)
                 .transform(CenterCrop(), RoundedCorners(10))
                 .into(countryImageView)
+            rootLayout.setOnClickListener {
+                countryItemClickListener?.invoke(countryList[position])
+            }
         }
+    }
+
+    fun setItemClickListener(listener: (CountryModel) -> Unit) {
+        countryItemClickListener = listener
+    }
+
+    fun clearList() {
+        countryList.clear()
+        notifyDataSetChanged()
     }
 }
