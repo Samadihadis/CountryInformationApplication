@@ -1,6 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleCentered="true"
+        tools:title="Country Detail" />
+
+    <View
+        android:id="@+id/lineView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/flagImageView"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/banner_image_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lineView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/countryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/flagImageView"
+        app:layout_constraintStart_toStartOf="@+id/flagImageView"
+        app:layout_constraintTop_toBottomOf="@+id/flagImageView"
+        tools:text="Country Name" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/populationTitleTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Population : "
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/countryName" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/populationValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/populationTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/populationTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/populationTitleTextView"
+        tools:text="Population" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/areaTitleTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Area : "
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/populationTitleTextView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/areaValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/areaTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/areaTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/areaTitleTextView"
+        tools:text="Area" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/languageTitleTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Language : "
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/areaTitleTextView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/languageValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/languageTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/languageTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/languageTitleTextView"
+        tools:text="Language" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/continentsTitleTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Continents : "
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/languageTitleTextView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/continentsValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/continentsTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/continentsTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/continentsTitleTextView"
+        tools:text="Continents" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/currencyTitleTextView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Currency : "
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/continentsTitleTextView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/currencyValueTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/currencyTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/currencyTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/currencyTitleTextView"
+        tools:text="Currency" />
+
+    <Button
+        android:id="@+id/googleMapButton"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#A39F9F"
+        android:text="See On Google Map"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

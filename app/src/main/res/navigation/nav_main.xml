@@ -31,9 +31,8 @@
         android:label="CountryDetailFragment">
         <argument
             android:name="countryModel"
-            android:defaultValue="@null"
             app:argType="com.samadihadis.countryinformationapplication.data.CountryModel"
-            app:nullable="true" />
+           />
     </fragment>
 
 
