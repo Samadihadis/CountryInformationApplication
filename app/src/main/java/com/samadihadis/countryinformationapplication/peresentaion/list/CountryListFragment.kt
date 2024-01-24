@@ -55,7 +55,7 @@ class CountryListFragment : Fragment() {
             getData()
         }
         countryAdaptor.setItemClickListener {
-            findNavController().navigate(CountryListFragmentDirections.actionToCountyDetailFragment())
+            findNavController().navigate(CountryListFragmentDirections.actionToCountyDetailFragment(it))
         }
         countryAdaptor.clearList()
     }

@@ -7,4 +7,4 @@ data class AUD(
 
     @SerializedName("name") val name: String,
     @SerializedName("symbol") val symbol: String
-): Serializable
+) : Serializable

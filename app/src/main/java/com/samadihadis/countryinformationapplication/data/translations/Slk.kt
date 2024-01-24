@@ -1,4 +1,4 @@
-package com.samadihadis.countryinformationapplication.data.language
+package com.samadihadis.countryinformationapplication.data.translations
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

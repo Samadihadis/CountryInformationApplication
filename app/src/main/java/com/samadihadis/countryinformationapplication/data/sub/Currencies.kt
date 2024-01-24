@@ -5,5 +5,5 @@ import java.io.Serializable
 
 data class Currencies(
 
-    @SerializedName("AUD") val AUD: AUD
+    @SerializedName("AUD") val AUD : AUD
 ): Serializable
