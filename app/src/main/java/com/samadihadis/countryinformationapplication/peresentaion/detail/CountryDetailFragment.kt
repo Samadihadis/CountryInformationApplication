@@ -32,7 +32,7 @@ class CountryDetailFragment : Fragment() {
             areaValueTextView.text = args.countryModel.area.toString()
             languageValueTextView.text = args.countryModel.languages.eng
             continentsValueTextView.text = args.countryModel.continents.toString()
-            currencyValueTextView.text = args.countryModel.currencies.AUD.name
+            currencyValueTextView.text = args.countryModel.currencies.AUD?.name
             Glide.with(requireContext())
                 .load("https://flagcdn.com/w320" + args.countryModel.flags)
                 .placeholder(R.drawable.banner_image_placeholder)
