@@ -27,6 +27,7 @@ class CountryListFragment : Fragment() {
         CountryListAdapter()
     }
     private var animation: ObjectAnimator? = null
+    private val dataList = mutableListOf<CountryModel>()
 
 
     override fun onCreateView(
@@ -40,7 +41,12 @@ class CountryListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         initAnimation()
-        getData()
+        if (dataList.isEmpty()){
+            getData()
+        }else{
+            countryAdaptor.clearList()
+            countryAdaptor.addItemList(dataList)
+        }
     }
 
     private fun setupViews() {
@@ -86,7 +92,8 @@ class CountryListFragment : Fragment() {
     private fun onServerResponse(response: Response<List<CountryModel>>) {
         if (response.isSuccessful) {
             if (!response.body().isNullOrEmpty()) {
-                val countryList = response.body() as List<CountryModel>
+                val countryList = response.body() as List<CountryModel> // at this line data is ready
+                dataList.addAll(countryList)
                 countryAdaptor.addItemList(countryList)
             } else {
                 showRetryButton()
