@@ -32,7 +32,7 @@ class CountryListAdapter() : RecyclerView.Adapter<CountryItemListViewHolder>() {
         holder.apply {
             countryName.text = countryList[position].name.official
             Glide.with(holder.rootLayout.context)
-                .load(countryList[position].flags.png)
+                .load(countryList[position].flags?.png)
                 .placeholder(R.drawable.banner_image_placeholder)
                 .transform(CenterCrop(), RoundedCorners(10))
                 .into(countryImageView)

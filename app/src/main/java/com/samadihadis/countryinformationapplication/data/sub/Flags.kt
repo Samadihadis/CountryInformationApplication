@@ -5,6 +5,6 @@ import java.io.Serializable
 
 data class Flags(
 
-    @SerializedName("png") val png: String,
-    @SerializedName("svg") val svg: String
+    @SerializedName("png") val png: String?,
+    @SerializedName("svg") val svg: String?
 ): Serializable

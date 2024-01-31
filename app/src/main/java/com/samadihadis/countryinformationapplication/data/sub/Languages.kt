@@ -5,5 +5,5 @@ import java.io.Serializable
 
 data class Languages(
 
-    @SerializedName("eng") val eng: String
+    @SerializedName("eng") val eng: String?
 ): Serializable

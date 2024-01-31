@@ -30,11 +30,11 @@ class CountryDetailFragment : Fragment() {
             countryName.text = args.countryModel.name.official
             populationValueTextView.text = args.countryModel.population.toString()
             areaValueTextView.text = args.countryModel.area.toString()
-            languageValueTextView.text = args.countryModel.languages.eng
+            languageValueTextView.text = args.countryModel.languages?.eng
             continentsValueTextView.text = args.countryModel.continents.toString()
             currencyValueTextView.text = args.countryModel.currencies.AUD?.name
             Glide.with(requireContext())
-                .load("https://flagcdn.com/w320" + args.countryModel.flags)
+                .load(args.countryModel.flags?.png)
                 .placeholder(R.drawable.banner_image_placeholder)
                 .into(flagImageView)
         }

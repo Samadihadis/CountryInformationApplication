@@ -6,5 +6,5 @@ import java.io.Serializable
 
 data class NativeName(
 
-    @SerializedName("eng") val eng: Eng
+    @SerializedName("eng") val eng: Eng?
 ): Serializable
