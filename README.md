@@ -1,6 +1,6 @@
-#CountryListInformationApp
+<h2>CountryListInformationApp</h2>
 
-On this app we shows country list in one page and its infromation in other page.
+<h4>On this app we shows country list in one page and its infromation in other page.</h4>
 
 #Features:
 - Constraintlayout
@@ -16,4 +16,8 @@ On this app we shows country list in one page and its infromation in other page.
 - Custom App Logo
 - Server API Url = https://restcountries.com/v3.1/
 
-  
+<div>
+  <img src="https://github.com/Samadihadis/CountryInformationApplication/blob/master/screenshot/Version1_Page1_Intro.png" width="150">
+  <img src="https://github.com/Samadihadis/CountryInformationApplication/blob/master/screenshot/Version1_Page2_List.png" width="150">
+  <img src="https://github.com/Samadihadis/CountryInformationApplication/blob/master/screenshot/Version1_Page3_Detail.png" width="150">
+</div>
