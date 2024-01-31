@@ -4,8 +4,8 @@
 
 #Features:
 - Constraintlayout
-- RecyclerView(Linear List)
-- Navigation Component(action, argument, backstack management)
+- RecyclerView(LinearList)
+- Navigation Component(action, argument)
 - Glide
 - Retrofit
 - Custom Adapter(Support Pagination) and ViewHolder
