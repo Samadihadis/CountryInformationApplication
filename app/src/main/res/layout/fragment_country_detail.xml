@@ -141,26 +141,26 @@
         tools:text="Continents" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/currencyTitleTextView"
+        android:id="@+id/startOfWeekTitleTextView"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Currency : "
+        android:text="Start Of Week : "
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/continentsTitleTextView" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/currencyValueTextView"
+        android:id="@+id/startOfWeekValueTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/currencyTitleTextView"
-        app:layout_constraintStart_toEndOf="@+id/currencyTitleTextView"
-        app:layout_constraintTop_toTopOf="@+id/currencyTitleTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/startOfWeekTitleTextView"
+        app:layout_constraintStart_toEndOf="@+id/startOfWeekTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/startOfWeekTitleTextView"
         tools:text="Currency" />
 
     <Button
