@@ -25,13 +25,19 @@ class CountryDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val lang = args.countryModel.languages?.eng
         binding.apply {
             toolbar.title = args.countryModel.name.common
             countryName.text = args.countryModel.name.official
-            populationValueTextView.text = args.countryModel.population.toString()
-            areaValueTextView.text = args.countryModel.area.toString()
-            languageValueTextView.text = args.countryModel.languages?.eng
-            continentsValueTextView.text = args.countryModel.continents.toString()
+            populationValueTextView.text = args.countryModel.population.toString().plus(" person")
+            areaValueTextView.text = args.countryModel.area?.toInt().toString().plus(" km2")
+            languageValueTextView.text = if (!lang.isNullOrEmpty()) {
+                lang
+            } else {
+                "- - -"
+            }
+            continentsValueTextView.text =
+                args.countryModel.continents.toString().replace("[", "").replace("]", "")
             startOfWeekValueTextView.text = args.countryModel.startOfWeek
             Glide.with(requireContext())
                 .load(args.countryModel.flags?.png)
