@@ -9,6 +9,7 @@
 - RecyclerView(LinearList)
 - Navigation Component(action, argument)
 - Support Local List Search
+- Opening Google Map App
 - Glide
 - Retrofit
 - Custom Adapter(Support Pagination) and ViewHolder
