@@ -30,6 +30,7 @@ class CountryListFragment : Fragment() {
     }
     private var animation: ObjectAnimator? = null
     private val dataList = mutableListOf<CountryModel>()
+    private var isOnlineSearch = true
 
 
     override fun onCreateView(
@@ -72,22 +73,36 @@ class CountryListFragment : Fragment() {
         countryAdaptor.clearList()
         binding.searchCountryEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int,count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int,before: Int, count: Int) {
-                if (dataList.isNotEmpty() && s.toString().length > 1) {
-                    val searchTerm = s.toString().lowercase()
-                    val filterList = dataList.filter {
-                        it.name.official.lowercase().contains(searchTerm)
-                    }
-                    countryAdaptor.clearList()
-                    countryAdaptor.addItemList(filterList)
-                }
-                if (s.isEmpty()) {
-                    countryAdaptor.clearList()
-                    countryAdaptor.addItemList(dataList)
-                }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (isOnlineSearch)
+                    onlineSearch(s)
+                else
+                    localSearch(s)
             }
         })
+    }
+
+    private fun onlineSearch(s: CharSequence) {
+        val searchTerm = s.toString().lowercase()
+        if (s.length > 1) {
+            searchCountryRequest(searchTerm)
+        }
+    }
+
+    private fun localSearch(s: CharSequence) {
+        if (dataList.isNotEmpty() && s.toString().length > 1) {
+            val searchTerm = s.toString().lowercase()
+            val filterList = dataList.filter {
+                it.name.official.lowercase().contains(searchTerm)
+            }
+            countryAdaptor.clearList()
+            countryAdaptor.addItemList(filterList)
+        }
+        if (s.isEmpty()) {
+            countryAdaptor.clearList()
+            countryAdaptor.addItemList(dataList)
+        }
     }
 
     private fun getData() {
@@ -104,11 +119,7 @@ class CountryListFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<CountryModel>>, t: Throwable) {
-                    Toast.makeText(requireContext(), "${t.localizedMessage}", Toast.LENGTH_SHORT)
-                        .show()
-                    t.printStackTrace()
-                    hideLoading()
-                    showRetryButton()
+                    onServerErrorResponse(t)
                 }
             })
     }
@@ -116,7 +127,8 @@ class CountryListFragment : Fragment() {
     private fun onServerResponse(response: Response<List<CountryModel>>) {
         if (response.isSuccessful) {
             if (!response.body().isNullOrEmpty()) {
-                val countryList = response.body() as List<CountryModel> // at this line data is ready
+                val countryList =
+                    response.body() as List<CountryModel> // at this line data is ready
                 dataList.addAll(countryList)
                 countryAdaptor.addItemList(countryList)
             } else {
@@ -127,6 +139,34 @@ class CountryListFragment : Fragment() {
             showRetryButton()
             Toast.makeText(requireContext(), "Got an error!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun searchCountryRequest(term: String) {
+        hideRetryButton()
+        showLoading()
+        countryAdaptor.clearList()
+        RetrofitClient.apiService.searchCountry(term)
+            .enqueue(object : retrofit2.Callback<List<CountryModel>> {
+                override fun onResponse(
+                    call: Call<List<CountryModel>>,
+                    response: Response<List<CountryModel>>
+                ) {
+                    onServerResponse(response)
+                    hideLoading()
+                }
+
+                override fun onFailure(call: Call<List<CountryModel>>, t: Throwable) {
+                    onServerErrorResponse(t)
+                }
+            })
+    }
+
+    private fun onServerErrorResponse(t: Throwable) {
+        Toast.makeText(requireContext(), "${t.localizedMessage}", Toast.LENGTH_SHORT)
+            .show()
+        t.printStackTrace()
+        hideLoading()
+        showRetryButton()
     }
 
     private fun showLoading() {
