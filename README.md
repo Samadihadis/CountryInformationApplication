@@ -8,6 +8,7 @@
 - Constraintlayout
 - RecyclerView(LinearList)
 - Navigation Component(action, argument)
+- Support Local List Search
 - Glide
 - Retrofit
 - Custom Adapter(Support Pagination) and ViewHolder
