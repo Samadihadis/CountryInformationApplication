@@ -2,6 +2,8 @@ package com.samadihadis.countryinformationapplication.peresentaion.list
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,9 +43,9 @@ class CountryListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         initAnimation()
-        if (dataList.isEmpty()){
+        if (dataList.isEmpty()) {
             getData()
-        }else{
+        } else {
             countryAdaptor.clearList()
             countryAdaptor.addItemList(dataList)
         }
@@ -61,9 +63,31 @@ class CountryListFragment : Fragment() {
             getData()
         }
         countryAdaptor.setItemClickListener {
-            findNavController().navigate(CountryListFragmentDirections.actionToCountyDetailFragment(it))
+            findNavController().navigate(
+                CountryListFragmentDirections.actionToCountyDetailFragment(
+                    it
+                )
+            )
         }
         countryAdaptor.clearList()
+        binding.searchCountryEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int,count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int,before: Int, count: Int) {
+                if (dataList.isNotEmpty() && s.toString().length > 1) {
+                    val searchTerm = s.toString().lowercase()
+                    val filterList = dataList.filter {
+                        it.name.official.lowercase().contains(searchTerm)
+                    }
+                    countryAdaptor.clearList()
+                    countryAdaptor.addItemList(filterList)
+                }
+                if (s.isEmpty()) {
+                    countryAdaptor.clearList()
+                    countryAdaptor.addItemList(dataList)
+                }
+            }
+        })
     }
 
     private fun getData() {
@@ -124,7 +148,7 @@ class CountryListFragment : Fragment() {
     }
 
     private fun initAnimation() {
-        animation =  ObjectAnimator.ofFloat(binding.progressBarLoading, "rotation", 0f, 360f).apply {
+        animation = ObjectAnimator.ofFloat(binding.progressBarLoading, "rotation", 0f, 360f).apply {
             duration = 1000
             repeatCount = ObjectAnimator.INFINITE
             interpolator = LinearInterpolator()
