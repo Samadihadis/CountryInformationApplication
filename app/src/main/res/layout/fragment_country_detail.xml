@@ -170,7 +170,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="#A39F9F"
+        android:backgroundTint="#617F97"
         android:text="See On Google Map"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

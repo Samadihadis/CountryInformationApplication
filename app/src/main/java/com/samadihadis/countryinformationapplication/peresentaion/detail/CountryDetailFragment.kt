@@ -1,10 +1,11 @@
 package com.samadihadis.countryinformationapplication.peresentaion.detail
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -43,6 +44,10 @@ class CountryDetailFragment : Fragment() {
                 .load(args.countryModel.flags?.png)
                 .placeholder(R.drawable.banner_image_placeholder)
                 .into(flagImageView)
+            googleMapButton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, args.countryModel.maps.googleMaps.toUri())
+                startActivity(intent)
+            }
         }
     }
 
