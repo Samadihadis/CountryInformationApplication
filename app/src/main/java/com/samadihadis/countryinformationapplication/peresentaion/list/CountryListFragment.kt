@@ -85,8 +85,12 @@ class CountryListFragment : Fragment() {
 
     private fun onlineSearch(s: CharSequence) {
         val searchTerm = s.toString().lowercase()
-        if (s.length > 1) {
+        if (s.isNotEmpty()) {
             searchCountryRequest(searchTerm)
+        }
+        if (s.isEmpty()) {
+            countryAdaptor.clearList()
+            getData()
         }
     }
 
