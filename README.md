@@ -8,7 +8,7 @@
 - Constraintlayout
 - RecyclerView(LinearList)
 - Navigation Component(action, argument)
-- Support Local List Search
+- Support Local/Online List Search
 - Opening Google Map App
 - Glide
 - Retrofit
